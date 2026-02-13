@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>San Valentín</title>
+<style>
+body{
+    background:#ffd6e7;
+    font-family: Arial, sans-serif;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    margin:0;
+    overflow:hidden;
+}
+
+/* Contenedor del corazón */
+.heart-container{
+    position:relative;
+    width:80vw;
+    max-width:400px;
+    height:80vw;
+    max-height:400px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+/* Corazón grande (pon tu imagen aquí) */
+.heart{
+    width:9000px;
+    height:800px;
+    background: url('imagenes/corazongrande-Photoroom.png') no-repeat center center;
+    background-size: contain;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    border-radius:50%;
+}
+
+/* Contenido dentro del corazón */
+.content{
+    text-align:center;
+    z-index:2;
+}
+
+h1{
+    font-size:2em;
+    margin:5px 0;
+}
+
+h2,h3{
+    margin:5px 0;
+}
+
+/* Botones */
+button{
+    padding:12px 20px;
+    border:none;
+    border-radius:25px;
+    cursor:pointer;
+    font-size:16px;
+    margin:10px;
+    transition:0.3s;
+}
+
+/* Colores de botones */
+#openBtn{ background:#ff9ac2; color:white; }
+#yesBtn{ background:#ff5a8f; color:white; }
+#noBtn{ background:#ffa07a; color:white; position:absolute; }
+
+.photo-container {
+    display: flex;           /* fila flexible */
+    flex-wrap: wrap;         /* si no caben, bajan a la siguiente línea */
+    justify-content: center; /* centrado horizontal */
+    gap: 10px;               /* espacio entre fotos */
+    margin-top: 10px;
+}
+
+.photo-container img {
+    width: 30%;        /* tamaño relativo al contenedor */
+    max-width: 120px;  /* límite máximo */
+    border-radius: 15px;
+}
+
+/* Contenido del resultado final */
+#result {
+    text-align: center;       /* centra texto y foto */
+    padding: 10px;
+}
+
+/* Foto final */
+#result img {
+    width: 80%;               /* ocupa buena parte del corazón */
+    max-width: 200px;         /* límite máximo en pantallas grandes */
+    border-radius: 15px;      /* esquinas redondeadas */
+    display: block;           /* para que margin funcione */
+    margin: 10px auto 0 auto; /* centrado horizontal con margen superior */
+}
+
+
+
+
+/* Oculto inicialmente */
+.hidden{ display:none; }
+
+/* Corazones flotando de fondo */
+.floating-heart{
+    position:absolute;
+    width:30px;
+    height:30px;
+    background: url('imagenes/corazonflota.webp') no-repeat center center;
+    background-size: contain;
+    animation: float 5s infinite;
+}
+
+/* Animación flotante */
+@keyframes float{
+    0%{ transform: translateY(0) translateX(0); opacity:1;}
+    50%{ transform: translateY(-200px) translateX(50px); opacity:0.6;}
+    100%{ transform: translateY(-400px) translateX(-30px); opacity:0;}
+}
+
+/* Responsive */
+@media(max-width:500px){
+    h1{ font-size:1.5em; }
+    h2,h3{ font-size:1em; }
+    img{ width:50px; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Corazones flotando de fondo -->
+<div class="floating-heart" style="left:10%; animation-duration:6s;"></div>
+<div class="floating-heart" style="left:50%; animation-duration:5s;"></div>
+<div class="floating-heart" style="left:80%; animation-duration:7s;"></div>
+
+<div class="heart-container">
+    <div class="heart">
+        <!-- Contenido inicial -->
+        <div class="content" id="initial">
+            <h1>COSHUUUUUUM</h1>
+            <button id="openBtn" onclick="openHeart()">ABREME</button>
+        </div>
+
+        <!-- Pregunta con fotos -->
+        <div class="content hidden" id="question">
+            <h2>¿Quieres ser mi San Valentín?</h2>
+            <h3>Will you be my Valentine?</h3>
+            <h3>Ще бъдеш ли моят Свети Валентин?</h3>
+
+            <!-- Tus fotos aquí -->
+
+             <div class="photo-container">
+                <img src="imagenes/foto1.jpg" alt="Foto 1">
+                <img src="imagenes/Foto2.jpg" alt="Foto 2">
+                <img src="imagenes/foto 3.jpg" alt="Foto 3">
+            </div>
+
+            <br>
+            <button id="yesBtn" onclick="yes()">SI</button>
+            <button id="noBtn" onmouseover="moveNo()">NO</button>
+        </div>
+
+        <!-- Resultado final -->
+        <div class="content hidden" id="result">
+            <h2>JEJEJE buena decisión muchas grachias</h2>
+            <img src="imagenes/FOTO FINAL.jpg" alt="Foto final">
+        </div>
+    </div>
+</div>
+
+<script>
+function openHeart(){
+    document.getElementById("initial").classList.add("hidden");
+    document.getElementById("question").classList.remove("hidden");
+}
+
+function yes(){
+    document.getElementById("question").classList.add("hidden");
+    document.getElementById("result").classList.remove("hidden");
+}
+
+// Botón NO imposible de pulsar
+function moveNo(){
+    const btn=document.getElementById("noBtn");
+    btn.style.top=Math.random()*60 + "%";
+    btn.style.left=Math.random()*60 + "%";
+}
+</script>
+
+</body>
+</html>
